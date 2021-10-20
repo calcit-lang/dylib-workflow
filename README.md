@@ -4,18 +4,13 @@
 
 ### Usages
 
-Install to `~/.config/calcit/modules/`, compile and provide `*.dylib` file:
-
-```bash
-cargo build --release
-mkdir dylibs/ && cp -v target/release/*.dylib dylibs/ # supported macos only
-```
-
-Providing:
+APIs:
 
 ```cirru
 lib.core/path-exists? a
 ```
+
+Install to `~/.config/calcit/modules/`, compile and provide `*.{dylib,so}` file with `./build.sh`.
 
 ### Workflow
 

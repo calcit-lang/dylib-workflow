@@ -31,6 +31,6 @@ jobs:
 
       - run: cargo build --release
 
-      - run: mkdir dylibs/ && ls target/release/ && cp -v target/release/*.dylib dylibs/
+      - run: mkdir dylibs/ && ls target/release/ && cp -v target/release/*.* dylibs/
 
       - run: cr -1
