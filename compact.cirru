@@ -8,13 +8,11 @@
       :ns $ quote
         ns lib.core $ :require
           lib.$meta :refer $ calcit-dirname
-          lib.util :refer $ get-dylib-ext or-current-path
+          lib.util :refer $ get-dylib-path
       :defs $ {}
         |path-exists? $ quote
           defn path-exists? (name)
-            &call-dylib-edn
-              str (or-current-path calcit-dirname) "\"/dylibs/libcalcit_std" $ get-dylib-ext
-              , "\"path_exists" name
+            &call-dylib-edn (get-dylib-path "\"/dylibs/libcalcit_std") "\"path_exists" name
     |lib.test $ {}
       :ns $ quote
         ns lib.test $ :require
@@ -29,10 +27,15 @@
         |reload! $ quote
           defn reload! $
     |lib.util $ {}
-      :ns $ quote (ns lib.util)
+      :ns $ quote
+        ns lib.util $ :require
+          lib.$meta :refer $ calcit-dirname calcit-filename
       :defs $ {}
         |get-dylib-ext $ quote
           defmacro get-dylib-ext () $ case-default (&get-os) "\".so" (:macos "\".dylib") (:windows "\".dll")
+        |get-dylib-path $ quote
+          defn get-dylib-path (p)
+            str (or-current-path calcit-dirname) p $ get-dylib-ext
         |or-current-path $ quote
           defn or-current-path (p)
             if (blank? p) "\"." p
