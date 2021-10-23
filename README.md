@@ -1,6 +1,6 @@
 ## Workflow
 
-> Rust libray for Calcit runtime.
+> Rust library for Calcit runtime.
 
 ### Usages
 
