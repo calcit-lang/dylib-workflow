@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "calcit_std"
-version = "0.0.3"
+version = "0.0.1"
 dependencies = [
  "cirru_edn",
  "cirru_parser",
