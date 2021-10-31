@@ -2,7 +2,7 @@
 {} (:package |lib)
   :configs $ {} (:init-fn |lib.test/main!) (:reload-fn |lib.test/reload!)
     :modules $ []
-    :version |0.0.3
+    :version |0.0.1
   :files $ {}
     |lib.core $ {}
       :ns $ quote
