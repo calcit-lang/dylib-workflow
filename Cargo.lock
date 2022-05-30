@@ -12,9 +12,9 @@ dependencies = [
 
 [[package]]
 name = "cirru_edn"
-version = "0.2.17"
+version = "0.2.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9eeae0f1e55252f1446f5dc6cb75005bf6e1dc45d55411017a75182e2fa84237"
+checksum = "976096111e963ec562a27c603e4fa60725b148a113fc5651978a4a377dd22b4b"
 dependencies = [
  "cirru_parser",
  "hex",
@@ -23,9 +23,9 @@ dependencies = [
 
 [[package]]
 name = "cirru_parser"
-version = "0.1.18"
+version = "0.1.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4818f8cbad45841e6e0166ae5f1bad3051f63ad398a1e47586fa61fb9fba6ce"
+checksum = "39236d6a490271b719e0c04687a913360a829b9bd83ba787e4e53eeaea8819e5"
 
 [[package]]
 name = "hex"
