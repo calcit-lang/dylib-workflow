@@ -9,7 +9,7 @@ name: Test
 jobs:
   build_and_test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
