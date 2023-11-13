@@ -9,25 +9,27 @@ name: Test
 jobs:
   build_and_test:
     name: Test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: supplypike/setup-bin@v3
         with:
-          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.7.0-a3/cr'
+          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/cr'
           name: 'cr'
-          version: '0.7.0-a3'
+          version: '0.8.9'
 
       - uses: supplypike/setup-bin@v3
         with:
-          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.7.0-a3/caps'
+          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/caps'
           name: 'caps'
-          version: '0.7.0-a3'
+          version: '0.8.9'
 
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
 
       - run: cargo build --release
 
