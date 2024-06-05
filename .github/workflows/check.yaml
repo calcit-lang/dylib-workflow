@@ -13,17 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: supplypike/setup-bin@v3
+      - uses: calcit-lang/setup-cr@0.0.3
         with:
-          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/cr'
-          name: 'cr'
-          version: '0.8.9'
-
-      - uses: supplypike/setup-bin@v3
-        with:
-          uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/caps'
-          name: 'caps'
-          version: '0.8.9'
+          version: "0.8.52"
 
       - uses: dtolnay/rust-toolchain@stable
         with:
