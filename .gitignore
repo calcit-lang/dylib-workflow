@@ -14,3 +14,6 @@
 /dylibs/
 
 .DS_Store
+
+
+.copilot-tmp/
