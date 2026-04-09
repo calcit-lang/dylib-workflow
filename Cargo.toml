@@ -2,7 +2,7 @@
 name = "calcit_dylib"
 version = "0.0.1"
 authors = ["jiyinyiyong <jiyinyiyong@gmail.com>"]
-edition = "2021"
+edition = "2024"
 
 [lib]
 name = "calcit_std"
@@ -13,5 +13,5 @@ crate-type = ["dylib"] # Creates dynamic lib
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cirru_edn = "0.6.13"
-cirru_parser = "0.1.31"
+cirru_edn = "0.7.4"
+cirru_parser = "0.2.4"
