@@ -14,4 +14,4 @@ crate-type = ["dylib"] # Creates dynamic lib
 
 [dependencies]
 cirru_edn = "0.8.0"
-cirru_parser = "0.2.8"
+cirru_parser = "=0.2.15"
