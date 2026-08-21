@@ -1,51 +1,67 @@
 
-{} (:package |lib)
-  :configs $ {} (:init-fn |lib.test/main!) (:reload-fn |lib.test/reload!) (:version |0.0.1)
-    :modules $ []
+{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `cr query` to inspect and `cr edit`/`cr tree` to modify. Run `cr docs agents --full` first. Manual edits must follow format and schema conventions, then run `cr edit format`.") (:package |lib)
   :entries $ {}
+    :default $ {} (:description |) (:init-fn 'lib.test/main!) (:mode :native) (:reload-fn 'lib.test/reload!)
+      :feature-policy $ {}
+      :modules $ []
+      :type-slots $ {}
   :files $ {}
-    |lib.core $ %{} :FileEntry
+    |lib.core $ %{} 'FileEntry
       :defs $ {}
-        |path-exists? $ %{} :CodeEntry (:doc |)
+        |path-exists? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn path-exists? (name)
-              &call-dylib-edn (get-dylib-path "\"/dylibs/libcalcit_std") "\"path_exists" name
-      :ns $ %{} :CodeEntry (:doc |)
+              &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
+          :examples $ []
+          :schema $ :: 'Dynamic
+      :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns lib.core $ :require
             lib.$meta :refer $ calcit-dirname
             lib.util :refer $ get-dylib-path
-    |lib.test $ %{} :FileEntry
+    |lib.test $ %{} 'FileEntry
       :defs $ {}
-        |main! $ %{} :CodeEntry (:doc |)
+        |main! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn main! () $ run-tests
-        |reload! $ %{} :CodeEntry (:doc |)
+          :examples $ []
+          :schema $ :: 'Dynamic
+        |reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn reload! $
-        |run-tests $ %{} :CodeEntry (:doc |)
+          :examples $ []
+          :schema $ :: 'Dynamic
+        |run-tests $ %{} 'CodeEntry (:doc |)
           :code $ quote
-            defn run-tests () (println "\"%%%% test for lib") (println calcit-filename calcit-dirname)
-              println (path-exists? "\"README.md") (path-exists? "\"build.js")
-      :ns $ %{} :CodeEntry (:doc |)
+            defn run-tests () (println "|%%%% test for lib") (println calcit-filename calcit-dirname)
+              println (path-exists? |README.md) (path-exists? |build.js)
+          :examples $ []
+          :schema $ :: 'Dynamic
+      :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns lib.test $ :require
             lib.core :refer $ path-exists?
             lib.$meta :refer $ calcit-dirname calcit-filename
-    |lib.util $ %{} :FileEntry
+    |lib.util $ %{} 'FileEntry
       :defs $ {}
-        |get-dylib-ext $ %{} :CodeEntry (:doc |)
+        |get-dylib-ext $ %{} 'CodeEntry (:doc |)
           :code $ quote
-            defmacro get-dylib-ext () $ case-default (&get-os) "\".so" (:macos "\".dylib") (:windows "\".dll")
-        |get-dylib-path $ %{} :CodeEntry (:doc |)
+            defmacro get-dylib-ext () $ case-default (&get-os) |.so (:macos |.dylib) (:windows |.dll)
+          :examples $ []
+          :schema $ :: 'Dynamic
+        |get-dylib-path $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn get-dylib-path (p)
               str (or-current-path calcit-dirname) p $ get-dylib-ext
-        |or-current-path $ %{} :CodeEntry (:doc |)
+          :examples $ []
+          :schema $ :: 'Dynamic
+        |or-current-path $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn or-current-path (p)
-              if (blank? p) "\"." p
-      :ns $ %{} :CodeEntry (:doc |)
+              if (blank? p) |. p
+          :examples $ []
+          :schema $ :: 'Dynamic
+      :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns lib.util $ :require
             lib.$meta :refer $ calcit-dirname calcit-filename
