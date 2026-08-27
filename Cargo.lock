@@ -7,7 +7,6 @@ name = "calcit_dylib"
 version = "0.0.1"
 dependencies = [
  "cirru_edn",
- "cirru_parser",
 ]
 
 [[package]]
