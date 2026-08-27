@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: calcit-lang/setup-calcit@v1
+      - uses: calcit-lang/setup-calcit@v1.3.0
+        with:
+          tools: calcit,caps
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -23,10 +25,30 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
 
+      - run: cargo fmt --check
+
+      - run: cargo test
+
+      - run: cargo clippy --all-targets -- -D warnings
+
       - run: cargo build --release
 
-      - run: cargo clippy
+      - run: calcit calcit.cirru edit format
 
-      - run: mkdir -p dylibs/ && ls target/release/ && cp -v target/release/*.* dylibs/
+      - run: git diff --exit-code -- calcit.cirru
+
+      - name: Verify C-safe exports only
+        run: |
+          exports="$(nm -D --defined-only target/release/libcalcit_std.so)"
+          grep -q ' calcit_ffi_buffer_version$' <<<"$exports"
+          grep -q ' calcit_ffi_buffer_free$' <<<"$exports"
+          grep -q ' path_exists_calcit_ffi_v1$' <<<"$exports"
+          ! grep -Eq ' (abi_version|edn_version|path_exists)$' <<<"$exports"
+
+      - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_std.so dylibs/
+
+      - run: caps --ci
+
+      - run: calcit calcit.cirru --check-only
 
       - run: calcit calcit.cirru
