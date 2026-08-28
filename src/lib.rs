@@ -1,8 +1,6 @@
 use cirru_edn::Edn;
 use std::path::Path;
 
-use calcit_native_ffi::{CalcitFfiBuffer, run_buffer_adapter};
-
 calcit_native_ffi::export_buffer_abi_v1!();
 
 fn path_exists(args: Vec<Edn>) -> Result<Edn, String> {
@@ -17,27 +15,12 @@ fn path_exists(args: Vec<Edn>) -> Result<Edn, String> {
   }
 }
 
-unsafe fn call_path_exists(request_ptr: *const u8, request_len: usize, output: *mut CalcitFfiBuffer) -> i32 {
-  // SAFETY: the shared adapter copies and validates request bytes and owns the
-  // response buffer contract for this synchronous call.
-  unsafe { run_buffer_adapter(request_ptr, request_len, output, path_exists) }
-}
-
-/// Check one path through C-safe buffer protocol v1.
-///
-/// # Safety
-///
-/// Request bytes must remain readable and `output` writable for this call.
-#[unsafe(no_mangle)]
-pub unsafe extern "C" fn path_exists_calcit_ffi_v1(request_ptr: *const u8, request_len: usize, output: *mut CalcitFfiBuffer) -> i32 {
-  // SAFETY: the adapter copies and validates every call-scoped input.
-  unsafe { call_path_exists(request_ptr, request_len, output) }
-}
+calcit_native_ffi::export_edn_buffer_method_v1!(path_exists_calcit_ffi_v1, path_exists);
 
 #[cfg(test)]
 mod tests {
   use super::*;
-  use calcit_native_ffi::copy_buffer;
+  use calcit_native_ffi::{CalcitFfiBuffer, copy_buffer};
   use cirru_edn::EdnListView;
   use std::ptr;
 
