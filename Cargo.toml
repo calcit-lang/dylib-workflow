@@ -13,5 +13,5 @@ crate-type = ["cdylib"] # Expose only the stable C-safe buffer ABI.
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-calcit_native_ffi = "0.1.1"
+calcit_native_ffi = "0.1.2"
 cirru_edn = "0.8.0"
