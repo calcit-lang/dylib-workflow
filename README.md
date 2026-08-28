@@ -18,11 +18,12 @@ it does not expose Rust-layout `Vec<Edn>` entry points.
 
 The shared descriptor, buffer ownership, Cirru EDN transport, and adapter come
 from [`calcit_native_ffi`](https://github.com/calcit-lang/calcit-native-ffi).
-The template keeps only its native business logic and exported method symbol.
+The template uses its synchronous EDN export macro and keeps only native
+business logic plus the explicit method symbol.
 
 共享 descriptor、buffer ownership、Cirru EDN transport 与 adapter 由
 [`calcit_native_ffi`](https://github.com/calcit-lang/calcit-native-ffi) 维护；
-模板本身只保留 native 业务逻辑和对外方法 symbol。
+模板使用共享的同步 EDN export macro，只保留 native 业务逻辑和显式方法 symbol。
 
 The Calcit wrapper is fully typed and uses `Unit`/`&unit` for procedure
 results. CI rejects new dynamic, nil, deprecated-API, unsafe-coerce, or dynamic
