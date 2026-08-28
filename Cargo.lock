@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "calcit_dylib"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = [
  "calcit_native_ffi",
  "cirru_edn",
