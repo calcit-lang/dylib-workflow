@@ -20,12 +20,21 @@ The shared descriptor, buffer ownership, Cirru EDN transport, and adapter come
 from [`calcit_native_ffi`](https://github.com/calcit-lang/calcit-native-ffi).
 The template uses its synchronous EDN export macro and keeps only native
 business logic plus the explicit method symbol. It tracks
-`calcit_native_ffi 0.1.2`, whose shared raw ABI contracts stay on protocol v1.
+`calcit_native_ffi 0.1.3`, whose shared raw ABI contracts stay on protocol v1.
 
 共享 descriptor、buffer ownership、Cirru EDN transport 与 adapter 由
 [`calcit_native_ffi`](https://github.com/calcit-lang/calcit-native-ffi) 维护；
 模板使用共享的同步 EDN export macro，只保留 native 业务逻辑和显式方法 symbol。
-模板当前使用 `calcit_native_ffi 0.1.2`；共享 raw ABI contract 仍保持 protocol v1。
+模板当前使用 `calcit_native_ffi 0.1.3`；共享 raw ABI contract 仍保持 protocol v1。
+
+This repository is a workflow template rather than a versioned Calcit module.
+Its `deps.cirru :version` is project metadata only: maintenance changes are
+merged into `main` without incrementing that value, creating version tags, or
+publishing GitHub releases. Consumers should copy or fork the current `main`.
+
+本仓库是 workflow 模板，不是需要独立版本发布的 Calcit 模块。
+`deps.cirru :version` 仅作为项目元数据；维护改动合并到 `main` 即可，不递增该值、
+不创建版本 tag，也不发布 GitHub Release。使用方应复制或 fork 当前 `main`。
 
 The Calcit wrapper is fully typed and uses `Unit`/`&unit` for procedure
 results. CI rejects new dynamic, nil, deprecated-API, unsafe-coerce, or dynamic
