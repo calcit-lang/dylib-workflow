@@ -7,6 +7,9 @@ on:
 
 name: Test
 
+permissions:
+  contents: read
+
 jobs:
   build_and_test:
     name: Test
@@ -14,9 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: calcit-lang/setup-calcit@v1
+      - uses: calcit-lang/setup-calcit@704b3f5cd6f9ce3bd1e0c926dbdd1d181adb8180 # v1
         with:
           tools: calcit,caps
+
+      - run: caps verify --toolchain
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -48,8 +53,6 @@ jobs:
       - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_std.so dylibs/
 
       - run: caps --strict --ci
-
-      - run: caps verify --toolchain
 
       - run: calcit calcit.cirru --check-only
 
