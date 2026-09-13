@@ -1,84 +1,77 @@
 
-{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`.") (:package |lib)
-  :entries $ {}
-    :default $ {} (:description |) (:init-fn 'lib.test/main!) (:mode :native) (:reload-fn 'lib.test/reload!)
+{}
+  :about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`."
+  :package |lib
+  :entries $ {} $ :default
+    {} (:description |) (:init-fn 'lib.test/main!) (:mode :native)
+      :reload-fn 'lib.test/reload!
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
   :files $ {}
     'lib.core $ %{} 'FileEntry
-      :defs $ {}
-        'path-exists? $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn path-exists? (name)
-              &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
+      :defs $ {} $ 'path-exists?
+        %{} 'CodeEntry (:doc |)
+          :code $ quote $ defn path-exists? (name)
+            &call-dylib-edn
+              get-dylib-path |/dylibs/libcalcit_std
+              , |path_exists name
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'Bool)
-              :args $ [] 'String
+          :schema $ :: 'Fn $ {} (:return 'Bool)
+            :args $ [] 'String
       :ns $ %{} 'NsEntry (:doc |)
-        :code $ quote
-          ns lib.core $ :require
+        :code $ quote $ ns lib.core
+          :require
             lib.$meta :refer $ calcit-dirname
             lib.util :refer $ get-dylib-path
     'lib.test $ %{} 'FileEntry
       :defs $ {}
         'main! $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn main! () $ run-tests
+          :code $ quote $ defn main! () (run-tests)
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'Unit)
-              :args $ []
+          :schema $ :: 'Fn $ {} (:return 'Unit)
+            :args $ []
         'reload! $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn reload! () &unit
+          :code $ quote $ defn reload! () &unit
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'Unit)
-              :args $ []
+          :schema $ :: 'Fn $ {} (:return 'Unit)
+            :args $ []
         'run-tests $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn run-tests () (println "|%%%% test for lib") (println calcit-filename calcit-dirname)
-              println (path-exists? |README.md) (path-exists? |build.js)
-              , &unit
+          :code $ quote $ defn run-tests ()
+            println "|%%%% test for lib"
+            println calcit-filename calcit-dirname
+            println (path-exists? |README.md) (path-exists? |build.js)
+            , &unit
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'Unit)
-              :args $ []
+          :schema $ :: 'Fn $ {} (:return 'Unit)
+            :args $ []
       :ns $ %{} 'NsEntry (:doc |)
-        :code $ quote
-          ns lib.test $ :require
+        :code $ quote $ ns lib.test
+          :require
             lib.core :refer $ path-exists?
             lib.$meta :refer $ calcit-dirname calcit-filename
     'lib.util $ %{} 'FileEntry
       :defs $ {}
         'get-dylib-ext $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defmacro get-dylib-ext () $ case-default (&get-os) |.so (:macos |.dylib) (:windows |.dll)
+          :code $ quote $ defmacro get-dylib-ext ()
+            case-default (&get-os) |.so (:macos |.dylib) (:windows |.dll)
           :examples $ []
-          :schema $ :: 'Macro
-            {}
-              :capabilities $ #{} :platform-read
-              :expansion $ :: 'Expr 'String
-              :required $ []
+          :schema $ :: 'Macro $ {}
+            :capabilities $ #{} :platform-read
+            :expansion $ :: 'Expr 'String
+            :required $ []
         'get-dylib-path $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn get-dylib-path (p)
-              str (or-current-path calcit-dirname) p $ get-dylib-ext
+          :code $ quote $ defn get-dylib-path (p)
+            str (or-current-path calcit-dirname) p $ get-dylib-ext
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'String)
-              :args $ [] 'String
+          :schema $ :: 'Fn $ {} (:return 'String)
+            :args $ [] 'String
         'or-current-path $ %{} 'CodeEntry (:doc |)
-          :code $ quote
-            defn or-current-path (p)
-              if (blank? p) |. p
+          :code $ quote $ defn or-current-path (p)
+            if (blank? p) |. p
           :examples $ []
-          :schema $ :: 'Fn
-            {} (:return 'String)
-              :args $ [] 'String
+          :schema $ :: 'Fn $ {} (:return 'String)
+            :args $ [] 'String
       :ns $ %{} 'NsEntry (:doc |)
-        :code $ quote
-          ns lib.util $ :require
-            lib.$meta :refer $ calcit-dirname calcit-filename
+        :code $ quote $ ns lib.util
+          :require $ lib.$meta :refer $ calcit-dirname calcit-filename
