@@ -3,8 +3,7 @@
   :about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`."
   :package |lib
   :entries $ {} $ :default
-    {} (:description |) (:init-fn 'lib.test/main!) (:mode :native)
-      :reload-fn 'lib.test/reload!
+    {} (:description |) (:init-fn 'lib.test/main!) (:mode :native) (:reload-fn 'lib.test/reload!)
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
@@ -13,9 +12,7 @@
       :defs $ {} $ 'path-exists?
         %{} 'CodeEntry (:doc |)
           :code $ quote $ defn path-exists? (name)
-            &call-dylib-edn
-              get-dylib-path |/dylibs/libcalcit_std
-              , |path_exists name
+            &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Bool)
             :args $ [] 'String
@@ -37,9 +34,7 @@
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
         'run-tests $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn run-tests ()
-            println "|%%%% test for lib"
-            println calcit-filename calcit-dirname
+          :code $ quote $ defn run-tests () (println "|%%%% test for lib") (println calcit-filename calcit-dirname)
             println (path-exists? |README.md) (path-exists? |build.js)
             , &unit
           :examples $ []
