@@ -58,6 +58,6 @@ jobs:
 
       - run: calcit calcit.cirru analyze quality
 
-      - run: calcit calcit.cirru analyze dynamic-methods --max 0
+      - run: calcit calcit.cirru analyze dynamic-methods
 
       - run: calcit calcit.cirru
