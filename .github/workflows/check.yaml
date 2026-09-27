@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: calcit-lang/setup-calcit@v1.4.0
+      - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5.0
         with:
           tools: calcit,caps
 
@@ -25,7 +25,7 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: nightly
+          toolchain: stable
           components: clippy,rustfmt
 
       - uses: Swatinem/rust-cache@v2
@@ -58,6 +58,6 @@ jobs:
 
       - run: calcit calcit.cirru analyze quality
 
-      - run: calcit calcit.cirru analyze dynamic-methods --max 0
+      - run: calcit calcit.cirru analyze dynamic-methods
 
       - run: calcit calcit.cirru
