@@ -14,14 +14,26 @@ jobs:
   build_and_test:
     name: Test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5.0
+      - uses: calcit-lang/setup-calcit@v1.5.0
         with:
           tools: calcit,caps
+          caps-version: "0.1.1"
 
-      - run: caps verify --toolchain
+      - name: Validate Calcit source and contracts
+        run: |
+          caps --strict --ci
+          caps verify --toolchain
+          calcit calcit.cirru edit format
+          git diff --exit-code -- calcit.cirru
+          calcit calcit.cirru --check-only
+          calcit calcit.cirru analyze check-public --ns lib.core --ns lib.util --ns lib.test --summary-only --format json
+          calcit calcit.cirru analyze quality --format json
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -32,15 +44,11 @@ jobs:
 
       - run: cargo fmt --check
 
-      - run: cargo test
+      - run: cargo test --locked
 
       - run: cargo clippy --all-targets -- -D warnings
 
       - run: cargo build --release
-
-      - run: calcit calcit.cirru edit format
-
-      - run: git diff --exit-code -- calcit.cirru
 
       - name: Verify C-safe exports only
         run: |
@@ -52,12 +60,9 @@ jobs:
 
       - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_std.so dylibs/
 
-      - run: caps --strict --ci
-
-      - run: calcit calcit.cirru --check-only
-
-      - run: calcit calcit.cirru analyze quality
-
-      - run: calcit calcit.cirru analyze dynamic-methods
-
       - run: calcit calcit.cirru
+
+      - name: Validate usage documentation
+        run: |
+          calcit calcit.cirru docs format-md README.md --check
+          calcit calcit.cirru docs check-md README.md --failures-only
