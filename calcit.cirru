@@ -12,7 +12,9 @@
       :defs $ {} $ 'path-exists?
         %{} 'CodeEntry (:doc |)
           :code $ quote $ defn path-exists? (name)
-            &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
+            let
+                value $ &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
+              if (bool? value) value $ raise "|Native path-exists? expected a Bool"
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Bool)
             :args $ [] 'String
@@ -49,7 +51,7 @@
       :defs $ {}
         'get-dylib-ext $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defmacro get-dylib-ext ()
-            case-default (&get-os) |.so (:macos |.dylib) (:windows |.dll)
+            match (&get-os) (:macos |.dylib) (:windows |.dll) (_ |.so)
           :examples $ []
           :schema $ :: 'Macro $ {}
             :capabilities $ #{} :platform-read

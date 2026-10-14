@@ -32,6 +32,7 @@ jobs:
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
           calcit calcit.cirru --check-only
+          calcit calcit.cirru fix --workflow strict --verify --format json
           calcit calcit.cirru analyze check-public --ns lib.core --ns lib.util --ns lib.test --summary-only --format json
           calcit calcit.cirru analyze quality --format json
 
