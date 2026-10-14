@@ -43,7 +43,7 @@ method-dispatch debt.
 Calcit wrapper 已完整标注类型，过程返回值使用 `Unit`/`&unit`；CI 会拒绝新增
 dynamic、nil、deprecated API、unsafe-coerce 或动态方法分派债务。
 
-模板使用正式 Calcit 0.28.0 和 Caps 0.1.1，入口明确为 native；没有前端资源，
+模板使用正式 Calcit 0.29.3 和 Caps 0.1.1，入口明确为 native；没有前端资源，
 不增加 COS/CDN 配置或 JavaScript 构建。CI 保留严格检查、全部公开定义与原零债务
 质量门禁、两项 Rust buffer ABI 测试、Clippy、release 导出核对和实际 native 入口。
 删除只打印结果的重复 dynamic-methods 报告，不新增迁移规则或检查脚本。
