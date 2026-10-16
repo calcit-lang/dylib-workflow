@@ -23,10 +23,12 @@ jobs:
       - uses: calcit-lang/setup-calcit@v1.5.0
         with:
           tools: calcit,caps
+          deps-file: deps.cirru
           caps-version: "0.1.1"
 
       - name: Validate Calcit source and contracts
         run: |
+          set -euo pipefail
           caps --strict --ci
           caps verify --toolchain
           calcit calcit.cirru edit format
@@ -34,7 +36,10 @@ jobs:
           calcit calcit.cirru --check-only
           calcit calcit.cirru fix --workflow strict --verify --format json
           calcit calcit.cirru --check-only --ns lib.core --ns lib.util --ns lib.test --summary-only --format json
-          calcit calcit.cirru analyze quality --format json
+          calcit calcit.cirru analyze weak-types --summary-only --format json | jq -e '.data.summary.hits == 0'
+          calcit calcit.cirru analyze weak-types --only coverage --coverage-level none,partial --summary-only --format json | jq -e '.data.summary.definitions == 0'
+          calcit calcit.cirru analyze weak-types --only deprecated-call --summary-only --format json | jq -e '.data.summary.calls == 0'
+          calcit calcit.cirru analyze weak-types --only dynamic-method --summary-only --format json | jq -e '.data.summary.findings == 0'
 
       - uses: dtolnay/rust-toolchain@stable
         with:

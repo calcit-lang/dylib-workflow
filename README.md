@@ -43,11 +43,15 @@ method-dispatch debt.
 Calcit wrapper 已完整标注类型，过程返回值使用 `Unit`/`&unit`；CI 会拒绝新增
 dynamic、nil、deprecated API、unsafe-coerce 或动态方法分派债务。
 
-模板使用正式 Calcit 0.29.3 和 Caps 0.1.1，入口明确为 native；没有前端资源，
+模板使用正式 Calcit 0.30.0 和 Caps 0.1.1，入口明确为 native；没有前端资源，
 不增加 COS/CDN 配置或 JavaScript 构建。CI 保留严格检查、全部公开定义与原零债务
 质量门禁、两项 Rust buffer ABI 测试、Clippy、release 导出核对和实际 native 入口。
 删除只打印结果的重复 dynamic-methods 报告，不新增迁移规则或检查脚本。
 维护改动不递增模板/Cargo 版本，也不更改原 ABI 或共享 FFI 依赖。
+本轮不改 Calcit/Rust 源码或原测试；保留全部严格门禁，只将已弃用的
+`analyze quality` 换成当前 `weak-types` 视图并保持原零债务要求。
+日志采用 0.30.0 的 Unit 合同，原入口与 native 动态库回归需要实际执行，
+不能用编译或静态检查替代。0.30.1 尚未正式发布，不将稳定版验收当作完整 0.30.1 验收。
 
 Action 使用正式版本标签，标签可被移动，不等同不可变提交；只读权限和不保留
 checkout 凭证仅限制暴露范围，不能消除这项供应链风险。
