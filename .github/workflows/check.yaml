@@ -33,9 +33,8 @@ jobs:
           caps verify --toolchain
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
-          calcit calcit.cirru --check-only
+          calcit calcit.cirru --check-only --all-defs
           calcit calcit.cirru fix --workflow strict --verify --format json
-          calcit calcit.cirru --check-only --ns lib.core --ns lib.util --ns lib.test --summary-only --format json
           calcit calcit.cirru analyze weak-types --summary-only --format json | jq -e '.data.summary.hits == 0'
           calcit calcit.cirru analyze weak-types --only coverage --coverage-level none,partial --summary-only --format json | jq -e '.data.summary.definitions == 0'
           calcit calcit.cirru analyze weak-types --only deprecated-call --summary-only --format json | jq -e '.data.summary.calls == 0'
@@ -52,9 +51,9 @@ jobs:
 
       - run: cargo test --locked
 
-      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo clippy --locked --all-targets -- -D warnings
 
-      - run: cargo build --release
+      - run: ./build.sh
 
       - name: Verify C-safe exports only
         run: |
@@ -63,8 +62,6 @@ jobs:
           grep -q ' calcit_ffi_buffer_free$' <<<"$exports"
           grep -q ' path_exists_calcit_ffi_v1$' <<<"$exports"
           ! grep -Eq ' (abi_version|edn_version|path_exists)$' <<<"$exports"
-
-      - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_std.so dylibs/
 
       - run: calcit calcit.cirru
 
