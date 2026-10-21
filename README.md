@@ -2,6 +2,11 @@
 
 > C-safe native library example for the Calcit runtime.
 
+使用者影响：模板配对正式 Calcit **0.30.1**，不再使用 alpha.5；复制模板后应同步
+CLI 并重新构建本机 dylib，不混用 alpha runtime。本轮不改变 Calcit/Rust 源码、
+Cargo/lock、共享 FFI 依赖或 C-safe ABI；既有零债务门禁与原测试保留。
+本仓库不因此递增模板/Cargo 版本，也不创建 tag 或 GitHub Release。
+
 API 设计: https://github.com/calcit-lang/calcit_runner.rs/discussions/116 .
 
 ### Usages
@@ -43,7 +48,7 @@ method-dispatch debt.
 Calcit wrapper 已完整标注类型，过程返回值使用 `Unit`/`&unit`；CI 会拒绝新增
 dynamic、nil、deprecated API、unsafe-coerce 或动态方法分派债务。
 
-模板本轮使用 Calcit 0.30.1-alpha.5 和 Caps 0.1.1，入口明确为 native；没有前端资源，
+模板本轮使用正式 Calcit 0.30.1 和 Caps 0.1.1，入口明确为 native；没有前端资源，
 不增加 COS/CDN 配置或 JavaScript 构建。CI 保留严格检查、全部公开定义与原零债务
 质量门禁、两项 Rust buffer ABI 测试、Clippy、release 导出核对和实际 native 入口。
 删除只打印结果的重复 dynamic-methods 报告，不新增迁移规则或检查脚本。
@@ -56,12 +61,11 @@ dynamic、nil、deprecated API、unsafe-coerce 或动态方法分派债务。
 `libcalcit_std.so`；不再递归清空 `dylibs/`，也不复制其他扩展名文件。
 目标目录、库名、Darwin install name 和 C-safe protocol v1 保持不变，CI 复用同一构建脚本。
 
-截至 2026-10-20，正式 0.30.1 tag 已存在，但上游 Publish 在上传前暂停，等待
-[#2080](https://github.com/calcit-lang/calcit/issues/2080) 收尾复核；
-[发布说明](https://github.com/calcit-lang/calcit/releases/tag/0.30.1) 建议暂用完整配对的 alpha.5。
-本模板没有 npm runtime 依赖；候选验收不称作正式 0.30.1 发版，也不在本仓库恢复上游发布。
+本模板没有 npm runtime 依赖；正式 CLI、Caps strict/toolchain、全部定义和零债务门禁、
+原 Rust 测试、导出与实际动态库入口以本轮干净 Linux CI 为准。
+原匹配 alpha.5 基线通过不代替正式版本验收，也不代表所有平台已经覆盖。
 
-Action 使用正式版本标签，标签可被移动，不等同不可变提交；只读权限和不保留
+Action 引用沿用现有 tag/工具链通道（包括 Rust `stable`），可被移动，不等同不可变提交；只读权限和不保留
 checkout 凭证仅限制暴露范围，不能消除这项供应链风险。
 
 ### Workflow
