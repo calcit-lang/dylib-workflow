@@ -34,7 +34,9 @@ jobs:
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
           calcit calcit.cirru --check-only --all-defs
-          calcit calcit.cirru fix --workflow strict --verify --format json
+          report="$(calcit calcit.cirru fix --workflow strict --verify --format json)"
+          printf '%s\n' "$report"
+          jq -e '.data.workflow.status? == "passed" and .diagnostics? == []' <<< "$report"
           calcit calcit.cirru analyze weak-types --summary-only --format json | jq -e '.data.summary.hits == 0'
           calcit calcit.cirru analyze weak-types --only coverage --coverage-level none,partial --summary-only --format json | jq -e '.data.summary.definitions == 0'
           calcit calcit.cirru analyze weak-types --only deprecated-call --summary-only --format json | jq -e '.data.summary.calls == 0'
