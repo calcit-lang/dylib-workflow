@@ -2,9 +2,10 @@
 
 > C-safe native library example for the Calcit runtime.
 
-使用者影响：模板配对正式 Calcit **0.31.0**；复制模板后应同步
-CLI 并用原锁文件重新构建本机 dylib。本轮不改变 Calcit/Rust 源码、
-Cargo/lock、共享 FFI 依赖或 C-safe ABI；既有零债务门禁与原测试保留。
+使用者影响：模板配对正式 Calcit **0.32.0**；复制模板后应同步
+CLI 并用原锁文件重新构建本机 dylib。本轮由官方 format 迁移类型表示，7 个定义的完整查询视图相同；
+不改变 Rust 源码、Cargo/lock、共享 FFI 依赖或 C-safe ABI。
+新类型语法要求配套 CLI，既有零债务门禁与原测试保留。
 本仓库不因此递增模板/Cargo 版本，也不创建 tag 或 GitHub Release。
 
 API 设计: https://github.com/calcit-lang/calcit_runner.rs/discussions/116 .
@@ -49,7 +50,7 @@ method-dispatch debt.
 Calcit wrapper 已完整标注类型，过程返回值使用 `Unit`/`&unit`；CI 会拒绝新增
 dynamic、nil、deprecated API、unsafe-coerce 或动态方法分派债务。
 
-模板本轮使用正式 Calcit 0.31.0 和 Caps 0.1.1，入口明确为 native；没有前端资源，
+模板本轮使用正式 Calcit 0.32.0 和 Caps 0.1.1，入口明确为 native；没有前端资源，
 不增加 COS/CDN 配置或 JavaScript 构建。CI 保留严格检查、全部公开定义与原零债务
 质量门禁、两项 Rust buffer ABI 测试、Clippy、release 导出核对和实际 native 入口。
 不新增迁移规则或检查脚本，原 CI、测试和门禁完全保持。
