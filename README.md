@@ -2,7 +2,7 @@
 
 > C-safe native library example for the Calcit runtime.
 
-使用者影响：模板配对正式 Calcit **0.44.0**；复制模板后应同步
+使用者影响：模板配对正式 Calcit **0.45.0**；复制模板后应同步
 CLI 并用原锁文件重新构建本机 dylib。主线已采用当前类型表示，官方 format 无需再次改写 Snapshot；
 不改变 Rust 源码、Cargo/lock、共享 FFI 依赖或 C-safe ABI。
 新类型语法要求配套 CLI，既有零债务门禁与原测试保留。
