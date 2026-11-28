@@ -14,7 +14,12 @@
           :code $ quote $ defn path-exists? (name)
             let
                 value $ &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_std) |path_exists name
-              if (bool? value) value $ raise "|Native path-exists? expected a Bool"
+              match (edn:from-dynamic value)
+                (:ok edn)
+                  match edn
+                    (:bool result) result
+                    _ $ raise "|Native path-exists? expected a Bool"
+                _ $ raise "|Native path-exists? expected a Bool"
           :examples $ []
           :schema $ quote $ Fn String (-> Bool)
       :ns $ %{} 'NsEntry (:doc |)
